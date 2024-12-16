@@ -1,1 +1,17 @@
-@import "fonts.css";
+@import "../vendor/normalize.css";
+@import "../vendor/fonts.css";
+@import "header.css";
+@import "content.css";
+
+body {
+  background: #000;
+}
+
+.page {
+  padding: 45px 200px 60px 200px;
+  max-width: 880px;
+  margin: 0 auto;
+
+  color: #fff;
+  font-family: Inter, Arial, serif;
+}
