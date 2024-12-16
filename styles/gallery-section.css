@@ -1,0 +1,27 @@
+.gallery-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  justify-content: center;
+  grid-column-gap: 17px;
+  grid-row-gap: 20px;
+  margin-top: 51px;
+}
+
+.gallery-section__card {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gallery-section__image {
+  display: block;
+  width: 100%;
+}
+
+.gallery-section__name-like {
+  background: #fff;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
