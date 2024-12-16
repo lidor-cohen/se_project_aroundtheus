@@ -23,5 +23,27 @@
   color: #000;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 25px 20px;
+}
+
+.gallery-section__name {
+  margin: 0;
+  font-size: 24px;
+
+  font-weight: 900;
+  line-height: 29.05px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.gallery-section__like {
+  width: 24px;
+  transition: opacity 0.2s;
+
+  cursor: pointer;
+}
+
+.gallery-section__like:hover {
+  opacity: 0.5;
 }

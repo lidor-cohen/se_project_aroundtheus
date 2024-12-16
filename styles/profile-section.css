@@ -27,6 +27,11 @@
   border: 2px solid #fff;
   padding: 7px;
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.profile-section__edit-name-button:hover {
+  opacity: 0.6;
 }
 
 .profile-section__job {
@@ -46,4 +51,9 @@
   cursor: pointer;
 
   margin-left: auto;
+  transition: opacity 0.2s;
+}
+
+.profile-section__add-button:hover {
+  opacity: 0.6;
 }
