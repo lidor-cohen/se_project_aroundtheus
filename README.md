@@ -11,12 +11,12 @@ This is a simple webpage showcasing landscapes and scenic locations across the U
 ## Technologies Used:
 
 - HTML5
-- CSS3 -> Grid & Flexbox
+- CSS3
+- Grid & Flexbox
+- Responsive Design using Media Queries
 
 ## How to View:
 
 To view it live on the web, you may click here: [GitHub Pages](https://lidor-cohen.github.io/se_project_aroundtheus/)
 
-## License:
-
-This project is open source and available under the MIT License.
+## Media:
