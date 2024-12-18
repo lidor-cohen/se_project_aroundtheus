@@ -1,21 +1,22 @@
-# Project 3: Around The U.S.
+# Project 3: Around the U.S.
 
-### Overview  
+This is a simple webpage showcasing landscapes and scenic locations across the United States. The page features a gallery of images from various famous destinations, including Yosemite Valley, Lake Louise, and more, along with a profile section highlighting Jacques Cousteau as an explorer.
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)  
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+## Features:
+
+- **Profile Section**: Displays the profile of Jacques Cousteau, an iconic explorer.
+- **Gallery Section**: A collection of images representing stunning natural landscapes.
+- **Responsive Design**: The page is designed to be mobile-friendly and adjusts to different screen sizes.
+
+## Technologies Used:
+
+- HTML5
+- CSS3 -> Grid & Flexbox
+
+## How to View:
+
+To view it live on the web, you may click here: [GitHub Pages](https://pages.github.com/):
+
+## License:
+
+This project is open source and available under the MIT License.
