@@ -1,8 +1,8 @@
 @import "../vendor/normalize.css";
 @import "../vendor/fonts.css";
-@import "header.css";
-@import "content.css";
-@import "footer.css";
+@import "../blocks/header.css";
+@import "../blocks/content.css";
+@import "../blocks/footer.css";
 
 body {
   background: #000;
