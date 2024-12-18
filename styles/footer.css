@@ -1,6 +1,5 @@
 .footer {
   padding-top: 67px;
-  padding-bottom: 60px;
 }
 
 .footer__copyright {
@@ -8,5 +7,11 @@
   margin: 0;
   font-size: 18px;
   font-weight: 400;
-  line-height: 21.78px;
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 937px) {
+  .footer {
+    text-align: center;
+  }
 }
