@@ -20,3 +20,7 @@ This is a simple webpage showcasing landscapes and scenic locations across the U
 To view it live on the web, you may click here: [GitHub Pages](https://lidor-cohen.github.io/se_project_aroundtheus/)
 
 ## Media:
+
+![Desktop View](./images/demo/desktop.png)
+![Tablet View](./images/demo/tablet.png)
+![Mobile View](./images/demo/mobile.png)
