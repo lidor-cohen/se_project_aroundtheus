@@ -15,7 +15,7 @@ This is a simple webpage showcasing landscapes and scenic locations across the U
 
 ## How to View:
 
-To view it live on the web, you may click here: [GitHub Pages](https://pages.github.com/):
+To view it live on the web, you may click here: [GitHub Pages](https://lidor-cohen.github.io/se_project_aroundtheus/)
 
 ## License:
 
