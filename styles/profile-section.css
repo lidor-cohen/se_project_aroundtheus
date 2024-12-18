@@ -5,11 +5,6 @@
   transition: gap 0.2s;
 }
 
-.profile-section__avatar {
-  width: 120px;
-  height: 120px;
-}
-
 .profile-section__info {
   display: flex;
   flex-direction: column;
@@ -66,7 +61,7 @@
   }
 
   .profile-section__info {
-    gap: 0;
+    gap: 4px;
   }
 
   .profile-section__name {
