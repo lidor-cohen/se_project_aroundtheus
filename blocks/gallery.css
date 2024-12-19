@@ -1,4 +1,4 @@
-.gallery-section {
+.gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
   justify-content: center;
@@ -7,18 +7,18 @@
   margin-top: 51px;
 }
 
-.gallery-section__card {
+.gallery__card {
   display: block;
   border-radius: 10px;
   overflow: hidden;
 }
 
-.gallery-section__image {
+.gallery__image {
   display: block;
   width: 100%;
 }
 
-.gallery-section__name-like {
+.gallery__name-like {
   background: #fff;
   color: #000;
   display: flex;
@@ -26,7 +26,7 @@
   padding: 25px 20px;
 }
 
-.gallery-section__name {
+.gallery__name {
   margin: 0;
   font-size: 24px;
 
@@ -37,13 +37,16 @@
   overflow: hidden;
 }
 
-.gallery-section__like {
+.gallery__like-btn {
   width: 24px;
   transition: opacity 0.2s;
+  border: none;
 
   cursor: pointer;
+  background: url(../images/Like.svg) no-repeat center;
+  background-size: contain;
 }
 
-.gallery-section__like:hover {
+.gallery__like-btn:hover {
   opacity: 0.5;
 }

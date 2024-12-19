@@ -14,4 +14,9 @@
   .footer {
     text-align: center;
   }
+
+  .footer__copyright {
+    font-size: 14px;
+    font-weight: 400;
+  }
 }

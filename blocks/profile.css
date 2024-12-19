@@ -1,111 +1,119 @@
-.profile-section {
+.profile {
   display: flex;
   align-items: center;
   gap: 30px;
-  transition: gap 0.2s;
 }
 
-.profile-section__info {
+.profile__info {
   display: flex;
   flex-direction: column;
   gap: 7px;
 }
 
-.profile-section__name {
+.profile__name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
+  gap: 10px;
   font-size: 42px;
   font-weight: 500;
   line-height: 1.15;
   transition: font-size 0.2s;
 }
 
-.profile-section__edit-name-button {
+.profile__edit-name-button {
+  background: transparent;
+  border: 1px solid #fff;
   box-sizing: border-box;
-  border: 2px solid #fff;
-  padding: 7px;
   cursor: pointer;
   transition: opacity 0.2s;
+  padding: 12px;
+  width: 24px;
+
+  background-image: url(../images/Edit\ Button.svg);
+  background-size: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.profile-section__edit-name-button:hover {
+.profile__edit-name-button:hover {
   opacity: 0.6;
 }
 
-.profile-section__job {
+.profile__job {
   margin: 0;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.2;
 }
 
-.profile-section__add-button {
-  background: #000;
+.profile__add-button {
+  background: transparent;
   color: #fff;
   padding: 14px 64px;
 
   border: 2px solid white;
+  border-radius: 2px;
+
   outline: none;
   cursor: pointer;
 
   margin-left: auto;
-  transition: opacity 0.2s, padding 0.2s;
+  transition: opacity 0.2s;
 }
 
-.profile-section__add-button:hover {
+.profile__add-button:hover {
   opacity: 0.6;
 }
 
+/* Tablet */
 @media screen and (max-width: 810px) {
-  .profile-section {
+  .profile {
     gap: 15px;
   }
 
-  .profile-section__info {
+  .profile__info {
     gap: 4px;
   }
 
-  .profile-section__name {
+  .profile__name {
     font-size: 32px;
   }
 
-  .profile-section__add-button {
+  .profile__add-button {
     padding: 12.5px 15px;
   }
 }
 
+/* Mobile */
 @media screen and (max-width: 637px) {
-  .profile-section {
+  .profile {
     flex-direction: column;
     text-align: center;
     max-width: 282px;
     margin: 0 auto;
     gap: 30px;
   }
-  .profile-section__info {
+  .profile__info {
     gap: 14px;
     padding-bottom: 6px;
   }
 
-  .profile-section__name {
+  .profile__name {
     font-size: 22px;
-    font-weight: 500;
     line-height: 1.2;
   }
 
-  .profile-section__edit-name-button {
-    box-sizing: border-box;
-    border: 1px solid #fff;
-    padding: 3px;
-    width: 18px;
-    margin-left: 7px;
+  .profile__edit-name-button {
+    padding: 10px;
   }
 
-  .profile-section__job {
+  .profile__job {
     font-size: 14px;
-    font-weight: 400;
   }
 
-  .profile-section__add-button {
+  .profile__add-button {
     flex: 1;
     width: 100%;
   }

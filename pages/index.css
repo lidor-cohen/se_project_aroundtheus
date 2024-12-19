@@ -1,18 +1,9 @@
 @import "../vendor/normalize.css";
 @import "../vendor/fonts.css";
+@import "../blocks/main-wrapper.css";
+@import "../blocks/page.css";
 @import "../blocks/header.css";
 @import "../blocks/content.css";
+@import "../blocks/profile.css";
+@import "../blocks/gallery.css";
 @import "../blocks/footer.css";
-
-body {
-  background: #000;
-}
-
-.page {
-  padding: 45px 20px 60px 20px;
-  max-width: 880px;
-  margin: 0 auto;
-
-  color: #fff;
-  font-family: Inter, Arial, serif;
-}
