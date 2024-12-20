@@ -17,109 +17,110 @@
     <title>Around the U.S.</title>
   </head>
 
-  <body>
-    <div class="main-wrapper">
-      <div class="page">
-        <header class="header">
-          <img src="images/logo.svg" alt="logo around the us" />
-        </header>
-        <main class="content">
-          <section class="profile">
-            <img
-              src="images/Avatar.png"
-              alt="profile picture"
-              class="profile__avatar"
-            />
-            <div class="profile__info">
-              <h1 class="profile__name">
-                Jacques Cousteau
-                <button
-                  type="button"
-                  src="images/Edit Button.svg"
-                  alt="edit button"
-                  class="profile__edit-name-button"
-                ></button>
-              </h1>
-              <h2 class="profile__job">Explorer</h2>
-            </div>
-            <button class="profile__add-button">
-              <img src="images/Add Button.svg" alt="add button icon" />
-            </button>
-          </section>
+  <body class="main-wrapper">
+    <div class="page">
+      <header class="header">
+        <img
+          class="header__logo"
+          src="images/logo.svg"
+          alt="logo around the us"
+        />
+      </header>
+      <main class="content">
+        <section class="profile">
+          <img
+            src="images/Avatar.png"
+            alt="profile picture"
+            class="profile__avatar"
+          />
+          <div class="profile__info">
+            <h1 class="profile__name">
+              Jacques Cousteau
+              <button
+                type="button"
+                aria-label="edit name button"
+                class="profile__edit-name-button"
+              ></button>
+            </h1>
+            <h2 class="profile__job">Explorer</h2>
+          </div>
+          <button type="button" class="profile__add-button">
+            <img src="images/add-button.svg" alt="add button icon" />
+          </button>
+        </section>
 
-          <section class="gallery">
-            <div class="gallery__card">
-              <img
-                class="gallery__image"
-                src="images/yosemite-valley.jpg"
-                alt="yosemite valley"
-              />
-              <div class="gallery__name-like">
-                <h2 class="gallery__name">Yosemite Valley</h2>
-                <button class="gallery__like-btn" />
-              </div>
+        <section class="gallery">
+          <div class="gallery__card">
+            <img
+              class="gallery__image"
+              src="images/yosemite-valley.jpg"
+              alt="yosemite valley"
+            />
+            <div class="gallery__name-like">
+              <h2 class="gallery__name">Yosemite Valley</h2>
+              <button type="button" class="gallery__like-btn"></button>
             </div>
-            <div class="gallery__card">
-              <img
-                class="gallery__image"
-                src="images/lake-louise.png"
-                alt="lake louise"
-              />
-              <div class="gallery__name-like">
-                <h2 class="gallery__name">Lake Louise</h2>
-                <button class="gallery__like-btn" />
-              </div>
+          </div>
+          <div class="gallery__card">
+            <img
+              class="gallery__image"
+              src="images/lake-louise.png"
+              alt="lake louise"
+            />
+            <div class="gallery__name-like">
+              <h2 class="gallery__name">Lake Louise</h2>
+              <button type="button" class="gallery__like-btn"></button>
             </div>
-            <div class="gallery__card">
-              <img
-                class="gallery__image"
-                src="images/bald-mountains.png"
-                alt="bald mountains"
-              />
-              <div class="gallery__name-like">
-                <h2 class="gallery__name">Bald Mountains</h2>
-                <button class="gallery__like-btn" />
-              </div>
+          </div>
+          <div class="gallery__card">
+            <img
+              class="gallery__image"
+              src="images/bald-mountains.png"
+              alt="bald mountains"
+            />
+            <div class="gallery__name-like">
+              <h2 class="gallery__name">Bald Mountains</h2>
+              <button type="button" class="gallery__like-btn"></button>
             </div>
-            <div class="gallery__card">
-              <img
-                class="gallery__image"
-                src="images/latemar.png"
-                alt="Latemar"
-              />
-              <div class="gallery__name-like">
-                <h2 class="gallery__name">Latemar</h2>
-                <button class="gallery__like-btn" />
-              </div>
+          </div>
+          <div class="gallery__card">
+            <img
+              class="gallery__image"
+              src="images/latemar.png"
+              alt="Latemar"
+            />
+            <div class="gallery__name-like">
+              <h2 class="gallery__name">Latemar</h2>
+              <button type="button" class="gallery__like-btn"></button>
             </div>
-            <div class="gallery__card">
-              <img
-                class="gallery__image"
-                src="images/vanoise-national-park.png"
-                alt="vanoise national park"
-              />
-              <div class="gallery__name-like">
-                <h2 class="gallery__name">Vanoise National Park</h2>
-                <button class="gallery__like-btn" />
-              </div>
+          </div>
+          <div class="gallery__card">
+            <img
+              class="gallery__image"
+              src="images/vanoise-national-park.png"
+              alt="vanoise national park"
+            />
+            <div class="gallery__name-like">
+              <h2 class="gallery__name">Vanoise National Park</h2>
+              <button type="button" class="gallery__like-btn"></button>
             </div>
-            <div class="gallery__card">
-              <img
-                class="gallery__image"
-                src="images/lago-di-braies.png"
-                alt="lago di braies"
-              />
-              <div class="gallery__name-like">
-                <h2 class="gallery__name">Lago di Braies</h2>
-                <button class="gallery__like-btn" />
-              </div>
+          </div>
+          <div class="gallery__card">
+            <img
+              class="gallery__image"
+              src="images/lago-di-braies.png"
+              alt="lago di braies"
+            />
+            <div class="gallery__name-like">
+              <h2 class="gallery__name">Lago di Braies</h2>
+              <button type="button" class="gallery__like-btn"></button>
             </div>
-          </section>
-        </main>
-        <footer class="footer">
-          <p class="footer__copyright">© 2024 Around The U.S.</p>
-        </footer>
-      </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">© 2024 Around The U.S.</p>
+      </footer>
     </div>
   </body>
 </html>
