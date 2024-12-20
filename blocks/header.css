@@ -4,7 +4,17 @@
   padding-bottom: 41px;
 }
 
-.header__logo {
-  width: 173px;
-  height: 33px;
+@media screen and (max-width: 637px) {
+  .header {
+    padding-bottom: 32px;
+    width: 100vw;
+  }
+
+  .header__logo {
+    padding-top: 28px;
+    padding-left: 27px;
+
+    width: 126px;
+    height: 24px;
+  }
 }

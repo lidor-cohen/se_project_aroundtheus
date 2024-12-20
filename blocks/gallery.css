@@ -50,3 +50,9 @@
 .gallery__like-btn:hover {
   opacity: 0.5;
 }
+
+@media screen and (max-width: 637px) {
+  .gallery {
+    padding: 29px;
+  }
+}
