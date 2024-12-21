@@ -12,7 +12,9 @@
 
 @media screen and (max-width: 937px) {
   .footer {
-    text-align: center;
+    padding-top: 48px;
+    padding-bottom: 36px;
+    padding-left: 19px;
   }
 
   .footer__copyright {

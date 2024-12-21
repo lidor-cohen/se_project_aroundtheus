@@ -54,5 +54,7 @@
 @media screen and (max-width: 637px) {
   .gallery {
     padding: 29px;
+    margin-top: 36px;
+    padding-bottom: 0;
   }
 }
