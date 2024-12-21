@@ -2,6 +2,8 @@
 
 This is a simple webpage showcasing landscapes and scenic locations across the United States. The page features a gallery of images from various famous destinations, including Yosemite Valley, Lake Louise, and more, along with a profile section highlighting Jacques Cousteau as an explorer.
 
+You can watch a video of me explaining the project: https://youtu.be/6r1fxD7MNL8
+
 ## Features:
 
 - **Profile Section**: Displays the profile of Jacques Cousteau, an iconic explorer.
