@@ -10,7 +10,7 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-.modal__mode_opened {
+.modal_opened {
   display: flex;
   justify-content: center;
   align-items: center;
