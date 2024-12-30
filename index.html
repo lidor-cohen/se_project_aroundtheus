@@ -1,152 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Lidor Cohen" />
-    <meta
-      name="description"
-      content="Explore stunning destinations across the U.S. through a curated gallery of beautiful landscapes and iconic locations, featuring Jacques Cousteau's adventures and exploration. Discover breathtaking views and hidden gems with every image."
-    />
-    <meta
-      name="keywords"
-      content="Jacques Cousteau, U.S. travel, exploration, landscapes, Yosemite Valley, Lake Louise, Bald Mountains, Latemar, Vanoise National Park, Lago di Braies, adventure, nature photography, scenic views, national parks, beautiful destinations"
-    />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="pages/index.css" />
 
-    <script src="scripts/index.js" defer></script>
-    <title>Around the U.S.</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Lidor Cohen" />
+  <meta name="description"
+    content="Explore stunning destinations across the U.S. through a curated gallery of beautiful landscapes and iconic locations, featuring Jacques Cousteau's adventures and exploration. Discover breathtaking views and hidden gems with every image." />
+  <meta name="keywords"
+    content="Jacques Cousteau, U.S. travel, exploration, landscapes, Yosemite Valley, Lake Louise, Bald Mountains, Latemar, Vanoise National Park, Lago di Braies, adventure, nature photography, scenic views, national parks, beautiful destinations" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="pages/index.css" />
 
-  <body class="main-wrapper">
-    <div class="page">
-      <header class="header">
-        <img
-          class="header__logo"
-          src="images/logo/logo.svg"
-          alt="logo around the us"
-        />
-      </header>
-      <main class="content">
-        <section class="profile">
-          <img
-            src="images/people/Avatar.png"
-            alt="profile picture"
-            class="profile__avatar"
-          />
-          <div class="profile__info">
-            <div class="profile__name-container">
-              <h1 class="profile__name">Jacques Cousteau</h1>
-              <button
-                type="button"
-                aria-label="edit name button"
-                class="profile__edit-name-button"
-              ></button>
-            </div>
-            <h2 class="profile__job">Explorer</h2>
-          </div>
-          <button type="button" class="profile__add-button">
-            <img src="images/icons/add-button.svg" alt="add button icon" />
-          </button>
-        </section>
+  <script src="scripts/index.js" defer></script>
+  <title>Around the U.S.</title>
+</head>
 
-        <section class="gallery">
-          <div class="gallery__card">
-            <img
-              class="gallery__image"
-              src="images/yosemite-valley.jpg"
-              alt="yosemite valley"
-            />
-            <div class="gallery__name-like">
-              <h2 class="gallery__name">Yosemite Valley</h2>
-              <button type="button" class="gallery__like-btn"></button>
-            </div>
+<body class="main-wrapper">
+  <div class="page">
+    <header class="header">
+      <img class="header__logo" src="images/logo/logo.svg" alt="logo around the us" />
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img src="images/people/Avatar.png" alt="profile picture" class="profile__avatar" />
+        <div class="profile__info">
+          <div class="profile__name-container">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button type="button" aria-label="edit name button" class="profile__edit-name-button"></button>
           </div>
-          <div class="gallery__card">
-            <img
-              class="gallery__image"
-              src="images/lake-louise.png"
-              alt="lake louise"
-            />
-            <div class="gallery__name-like">
-              <h2 class="gallery__name">Lake Louise</h2>
-              <button type="button" class="gallery__like-btn"></button>
-            </div>
-          </div>
-          <div class="gallery__card">
-            <img
-              class="gallery__image"
-              src="images/bald-mountains.png"
-              alt="bald mountains"
-            />
-            <div class="gallery__name-like">
-              <h2 class="gallery__name">Bald Mountains</h2>
-              <button type="button" class="gallery__like-btn"></button>
-            </div>
-          </div>
-          <div class="gallery__card">
-            <img
-              class="gallery__image"
-              src="images/latemar.png"
-              alt="Latemar"
-            />
-            <div class="gallery__name-like">
-              <h2 class="gallery__name">Latemar</h2>
-              <button type="button" class="gallery__like-btn"></button>
-            </div>
-          </div>
-          <div class="gallery__card">
-            <img
-              class="gallery__image"
-              src="images/vanoise-national-park.png"
-              alt="vanoise national park"
-            />
-            <div class="gallery__name-like">
-              <h2 class="gallery__name">Vanoise National Park</h2>
-              <button type="button" class="gallery__like-btn"></button>
-            </div>
-          </div>
-          <div class="gallery__card">
-            <img
-              class="gallery__image"
-              src="images/lago-di-braies.png"
-              alt="lago di braies"
-            />
-            <div class="gallery__name-like">
-              <h2 class="gallery__name">Lago di Braies</h2>
-              <button type="button" class="gallery__like-btn"></button>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer class="footer">
-        <p class="footer__copyright">© 2024 Around The U.S.</p>
-      </footer>
-
-      <div class="modal">
-        <div class="modal__container">
-          <button type="button" class="modal__exit-btn"></button>
-
-          <h2 class="modal__header">Edit Profile</h2>
-          <form class="form modal__form">
-            <input
-              type="text"
-              class="form__input"
-              id="name"
-              placeholder="Ex. Lidor Cohen"
-            />
-            <input
-              type="text"
-              class="form__input"
-              id="job"
-              placeholder="Ex. Journalist"
-            />
-
-            <button type="button" class="form__button">Save</button>
-          </form>
+          <h2 class="profile__job">Explorer</h2>
         </div>
+        <button type="button" class="profile__add-button">
+          <img src="images/icons/add-button.svg" alt="add button icon" />
+        </button>
+      </section>
+
+      <section class="gallery">
+        <template id="card-template">
+          <div class="card">
+            <img class="card__image" src="" alt="" />
+            <div class="card__name-like">
+              <h2 class="card__name"></h2>
+              <button type="button" class="card__like-btn"></button>
+            </div>
+          </div>
+        </template>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">© 2024 Around The U.S.</p>
+    </footer>
+
+    <div class="modal">
+      <div class="modal__container">
+        <button type="button" class="modal__exit-btn"></button>
+
+        <h2 class="modal__header">Edit Profile</h2>
+        <form class="form modal__form">
+          <input type="text" class="form__input" id="name" placeholder="Ex. Lidor Cohen" />
+          <input type="text" class="form__input" id="job" placeholder="Ex. Journalist" />
+
+          <button type="submit" class="form__button">Save</button>
+        </form>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

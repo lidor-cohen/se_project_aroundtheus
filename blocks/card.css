@@ -1,0 +1,44 @@
+.card {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card__image {
+  display: block;
+  width: 100%;
+  height: 282px;
+}
+
+.card__name-like {
+  background: #fff;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 20px;
+}
+
+.card__name {
+  margin: 0;
+  font-size: 24px;
+
+  font-weight: 900;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card__like-btn {
+  width: 24px;
+  transition: opacity 0.2s;
+  border: none;
+
+  cursor: pointer;
+  background: url(../images/like-button.svg) no-repeat center;
+  background-size: contain;
+}
+
+.card__like-btn:hover {
+  opacity: 0.5;
+}
