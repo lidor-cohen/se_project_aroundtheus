@@ -67,6 +67,7 @@
 
   .modal__container {
     margin: 0 auto;
+    padding: 25px 22px;
   }
 
   .modal__header {
