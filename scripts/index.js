@@ -25,6 +25,18 @@ const initialCards = [
   },
 ];
 
+const cardTemplate = document.querySelector("#card-template").content;
+const editProfileButton = document.querySelector(".profile__edit-name-button");
+const profileInfo = document.querySelector(".profile__info");
+const profileName = profileInfo.querySelector(".profile__name");
+const profileJob = profileInfo.querySelector(".profile__job");
+const editProfileModal = document.querySelector(".modal");
+const modalExitButton = editProfileModal.querySelector(".modal__exit-btn");
+const modalNameInput = editProfileModal.querySelector("#name");
+const modalJobInput = editProfileModal.querySelector("#job");
+const modalForm = document.forms["profile-form"];
+const gallery = document.querySelector(".gallery");
+
 function toggleModalVisibility() {
   editProfileModal.classList.toggle("modal_opened");
 }
@@ -33,12 +45,10 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = modalNameInput.value;
   profileJob.textContent = modalJobInput.value;
-  editProfileModal.classList.toggle("modal_opened");
+  toggleModalVisibility();
 }
 
 function getCardElement(card) {
-  const cardTemplate = document.querySelector("#card-template").content;
-
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__name");
@@ -50,28 +60,15 @@ function getCardElement(card) {
   return cardElement;
 }
 
-const editProfileButton = document.querySelector(".profile__edit-name-button");
-
-const profileInfo = document.querySelector(".profile__info");
-const profileName = profileInfo.querySelector(".profile__name");
-const profileJob = profileInfo.querySelector(".profile__job");
-
-const editProfileModal = document.querySelector(".modal");
-const modalExitButton = editProfileModal.querySelector(".modal__exit-btn");
-const modalNameInput = editProfileModal.querySelector("#name");
-const modalJobInput = editProfileModal.querySelector("#job");
-const modalForm = editProfileModal.querySelector(".modal__form");
-
-modalNameInput.value = profileName.textContent;
-modalJobInput.value = profileJob.textContent;
-
-editProfileButton.addEventListener("click", toggleModalVisibility);
+editProfileButton.addEventListener("click", function () {
+  modalNameInput.value = profileName.textContent;
+  modalJobInput.value = profileJob.textContent;
+  toggleModalVisibility();
+});
 modalExitButton.addEventListener("click", toggleModalVisibility);
 modalForm.addEventListener("submit", handleProfileFormSubmit);
 
-const gallery = document.querySelector(".gallery");
-let changingCardElement = null;
 for (item of initialCards) {
-  changingCardElement = getCardElement(item);
-  gallery.append(changingCardElement);
+  const cardElement = getCardElement(item);
+  gallery.append(cardElement);
 }
