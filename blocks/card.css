@@ -35,8 +35,15 @@
   border: none;
 
   cursor: pointer;
-  background: url(../images/icons/like-button.svg) no-repeat center;
+  background-image: url(../images/icons/like-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: contain;
+  background-color: transparent;
+}
+
+.card__like-btn_mode_liked {
+  background-image: url(../images/icons/liked-button.svg);
 }
 
 .card__like-btn:hover {

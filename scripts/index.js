@@ -25,7 +25,7 @@ const cardList = [
   },
 ];
 
-// -- Gallery Logic
+// -- Gallery
 
 const cardTemplate = document.querySelector("#card-template").content;
 const gallery = document.querySelector(".gallery");
@@ -34,10 +34,15 @@ function getCardElement(card) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__name");
+  const likeButton = cardElement.querySelector(".card__like-btn");
 
   cardImage.alt = card.name;
   cardImage.src = card.link;
   cardTitle.textContent = card.name;
+
+  likeButton.addEventListener("click", (evt) => {
+    evt.target.classList.toggle("card__like-btn_mode_liked");
+  });
 
   return cardElement;
 }
