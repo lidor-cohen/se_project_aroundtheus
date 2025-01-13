@@ -1,4 +1,4 @@
-const initialCards = [
+const cardList = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -25,28 +25,10 @@ const initialCards = [
   },
 ];
 
+// -- Gallery Logic
+
 const cardTemplate = document.querySelector("#card-template").content;
-const editProfileButton = document.querySelector(".profile__edit-name-button");
-const profileInfo = document.querySelector(".profile__info");
-const profileName = profileInfo.querySelector(".profile__name");
-const profileJob = profileInfo.querySelector(".profile__job");
-const editProfileModal = document.querySelector(".modal");
-const modalExitButton = editProfileModal.querySelector(".modal__exit-btn");
-const modalNameInput = editProfileModal.querySelector("#name");
-const modalJobInput = editProfileModal.querySelector("#job");
-const modalForm = document.forms["profile-form"];
 const gallery = document.querySelector(".gallery");
-
-function toggleModalVisibility() {
-  editProfileModal.classList.toggle("modal_opened");
-}
-
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = modalNameInput.value;
-  profileJob.textContent = modalJobInput.value;
-  toggleModalVisibility();
-}
 
 function getCardElement(card) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -60,15 +42,90 @@ function getCardElement(card) {
   return cardElement;
 }
 
-editProfileButton.addEventListener("click", function () {
-  modalNameInput.value = profileName.textContent;
-  modalJobInput.value = profileJob.textContent;
-  toggleModalVisibility();
-});
-modalExitButton.addEventListener("click", toggleModalVisibility);
-modalForm.addEventListener("submit", handleProfileFormSubmit);
+function addNewCard(cardObject) {
+  console.log(cardList);
+  cardList.push(cardObject);
 
-initialCards.forEach((item) => {
+  gallery.innerHTML = "";
+
+  cardList.forEach((item) => {
+    const cardElement = getCardElement(item);
+    gallery.append(cardElement);
+  });
+}
+
+cardList.forEach((item) => {
   const cardElement = getCardElement(item);
   gallery.append(cardElement);
+});
+
+// -- Modal Visibility
+
+function toggleModalVisibility(modalElement) {
+  modalElement.classList.toggle("modal_opened");
+}
+
+// -- Add Image Modal
+
+const newPlaceModal = document.querySelector(".modal--new-place");
+const addProfileButton = document.querySelector(".profile__add-button");
+const addProfileExitButton = newPlaceModal.querySelector(".modal__exit-btn");
+const addProfileCreateButton = document.forms["new-place-form"];
+const newPlaceName = newPlaceModal.querySelector("#place-name");
+const newPlaceUrl = newPlaceModal.querySelector("#place-url");
+
+addProfileButton.addEventListener("click", () =>
+  toggleModalVisibility(newPlaceModal)
+);
+
+addProfileExitButton.addEventListener("click", () =>
+  toggleModalVisibility(newPlaceModal)
+);
+
+newPlaceModal.addEventListener("submit", handleNewPlaceFormSubmit);
+
+function handleNewPlaceFormSubmit(evt) {
+  evt.preventDefault();
+
+  addNewCard({
+    name: newPlaceName.value,
+    link: newPlaceUrl.value,
+  });
+  toggleModalVisibility(newPlaceModal);
+}
+
+// -- Profile Modal
+
+const editProfileButton = document.querySelector(".profile__edit-name-button");
+const profileInfo = document.querySelector(".profile__info");
+const profileName = profileInfo.querySelector(".profile__name");
+const profileJob = profileInfo.querySelector(".profile__job");
+
+const editProfileModal = document.querySelector(".modal--edit-profile");
+const editProfileModalExitButton =
+  editProfileModal.querySelector(".modal__exit-btn");
+const editProfileModalNameInput = editProfileModal.querySelector("#name");
+const editProfileModalJobInput = editProfileModal.querySelector("#job");
+const editProfileModalForm = document.forms["profile-form"];
+
+// Set form content to name and job
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = editProfileModalNameInput.value;
+  profileJob.textContent = editProfileModalJobInput.value;
+  toggleModalVisibility(editProfileModal);
+}
+
+// Close editProfileModal
+editProfileModalExitButton.addEventListener("click", () =>
+  toggleModalVisibility(editProfileModal)
+);
+
+// Submit edit profile modal
+editProfileModalForm.addEventListener("submit", handleProfileFormSubmit);
+
+editProfileButton.addEventListener("click", function () {
+  editProfileModalNameInput.value = profileName.textContent;
+  editProfileModalJobInput.value = profileJob.textContent;
+  toggleModalVisibility(editProfileModal);
 });
