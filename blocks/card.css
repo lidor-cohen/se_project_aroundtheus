@@ -1,5 +1,6 @@
 .card {
   display: block;
+  position: relative;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -48,4 +49,26 @@
 
 .card__like-btn:hover {
   opacity: 0.5;
+}
+
+.card__delete-btn {
+  width: 18px;
+  height: 19px;
+  transition: opacity 0.2s;
+  border: none;
+  padding: 0;
+
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  background-image: url(../images/icons/trash-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+}
+
+.card__delete-btn:hover {
+  opacity: 0.6;
 }

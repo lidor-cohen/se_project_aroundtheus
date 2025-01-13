@@ -35,6 +35,7 @@ function getCardElement(card) {
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__name");
   const likeButton = cardElement.querySelector(".card__like-btn");
+  const deleteButton = cardElement.querySelector(".card__delete-btn");
 
   cardImage.alt = card.name;
   cardImage.src = card.link;
@@ -44,6 +45,10 @@ function getCardElement(card) {
     evt.target.classList.toggle("card__like-btn_mode_liked");
   });
 
+  deleteButton.addEventListener("click", (evt) => {
+    evt.target.closest(".card").remove();
+  });
+
   return cardElement;
 }
 
@@ -51,12 +56,8 @@ function addNewCard(cardObject) {
   console.log(cardList);
   cardList.push(cardObject);
 
-  gallery.innerHTML = "";
-
-  cardList.forEach((item) => {
-    const cardElement = getCardElement(item);
-    gallery.append(cardElement);
-  });
+  const cardElement = getCardElement(cardObject);
+  gallery.append(cardElement);
 }
 
 cardList.forEach((item) => {
@@ -96,6 +97,9 @@ function handleNewPlaceFormSubmit(evt) {
     name: newPlaceName.value,
     link: newPlaceUrl.value,
   });
+
+  newPlaceName.value = "";
+  newPlaceUrl.value = "";
   toggleModalVisibility(newPlaceModal);
 }
 
