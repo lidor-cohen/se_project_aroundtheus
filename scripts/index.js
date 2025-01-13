@@ -68,7 +68,7 @@ editProfileButton.addEventListener("click", function () {
 modalExitButton.addEventListener("click", toggleModalVisibility);
 modalForm.addEventListener("submit", handleProfileFormSubmit);
 
-for (item of initialCards) {
+initialCards.forEach((item) => {
   const cardElement = getCardElement(item);
   gallery.append(cardElement);
-}
+});
