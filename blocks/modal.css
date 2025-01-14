@@ -58,7 +58,7 @@
 .image-modal__name {
   position: absolute;
   margin: 0;
-  bottom: calc(-1em - 10px);
+  top: calc(100% + 10px);
 }
 
 .modal__header {
