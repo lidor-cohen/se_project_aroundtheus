@@ -25,6 +25,22 @@ const cardList = [
   },
 ];
 
+// -- Modal Visibility
+
+function toggleModalVisibility(modalElement) {
+  modalElement.classList.toggle("modal_opened");
+}
+
+// -- Image Modal
+
+const imageViewModal = document.querySelector(".modal--open-image");
+const imageViewModalExitButton =
+  imageViewModal.querySelector(".modal__exit-btn");
+
+imageViewModalExitButton.addEventListener("click", () =>
+  toggleModalVisibility(imageViewModal)
+);
+
 // -- Gallery
 
 const cardTemplate = document.querySelector("#card-template").content;
@@ -40,6 +56,15 @@ function getCardElement(card) {
   cardImage.alt = card.name;
   cardImage.src = card.link;
   cardTitle.textContent = card.name;
+
+  cardImage.addEventListener("click", (evt) => {
+    toggleModalVisibility(imageViewModal);
+    const image = imageViewModal.querySelector(".image-modal__image");
+    const imageName = imageViewModal.querySelector(".image-modal__name");
+    imageName.textContent = card.name;
+    image.alt = card.name;
+    image.src = card.link;
+  });
 
   likeButton.addEventListener("click", (evt) => {
     evt.target.classList.toggle("card__like-btn_mode_liked");
@@ -64,12 +89,6 @@ cardList.forEach((item) => {
   const cardElement = getCardElement(item);
   gallery.append(cardElement);
 });
-
-// -- Modal Visibility
-
-function toggleModalVisibility(modalElement) {
-  modalElement.classList.toggle("modal_opened");
-}
 
 // -- Add Image Modal
 
