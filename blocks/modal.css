@@ -50,12 +50,12 @@
   flex-direction: column;
 }
 
-.image-modal__image {
+.modal__image {
   max-width: 75vw;
   max-height: 75vh;
 }
 
-.image-modal__name {
+.modal__place-name {
   position: absolute;
   margin: 0;
   top: calc(100% + 10px);

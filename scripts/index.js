@@ -31,18 +31,18 @@ function toggleModalVisibility(modalElement) {
   modalElement.classList.toggle("modal_opened");
 }
 
-// -- Image Modal
+// -- Modal Exit Buttons
 
-const imageViewModal = document.querySelector(".modal--open-image");
-const imageViewModalExitButton =
-  imageViewModal.querySelector(".modal__exit-btn");
-
-imageViewModalExitButton.addEventListener("click", () =>
-  toggleModalVisibility(imageViewModal)
-);
+const exitButtons = document.querySelectorAll(".modal__exit-btn");
+exitButtons.forEach((exitButton) => {
+  exitButton.addEventListener("click", () => {
+    toggleModalVisibility(exitButton.closest(".modal"));
+  });
+});
 
 // -- Gallery
 
+const imageViewModal = document.querySelector(".modal--open-image");
 const cardTemplate = document.querySelector("#card-template").content;
 const gallery = document.querySelector(".gallery");
 
@@ -52,6 +52,8 @@ function getCardElement(card) {
   const cardTitle = cardElement.querySelector(".card__name");
   const likeButton = cardElement.querySelector(".card__like-btn");
   const deleteButton = cardElement.querySelector(".card__delete-btn");
+  const image = imageViewModal.querySelector(".modal__image");
+  const imageName = imageViewModal.querySelector(".modal__place-name");
 
   cardImage.alt = card.name;
   cardImage.src = card.link;
@@ -59,8 +61,7 @@ function getCardElement(card) {
 
   cardImage.addEventListener("click", (evt) => {
     toggleModalVisibility(imageViewModal);
-    const image = imageViewModal.querySelector(".image-modal__image");
-    const imageName = imageViewModal.querySelector(".image-modal__name");
+
     imageName.textContent = card.name;
     image.alt = card.name;
     image.src = card.link;
@@ -71,7 +72,7 @@ function getCardElement(card) {
   });
 
   deleteButton.addEventListener("click", (evt) => {
-    evt.target.closest(".card").remove();
+    cardElement.remove();
   });
 
   return cardElement;
@@ -82,7 +83,7 @@ function addNewCard(cardObject) {
   cardList.push(cardObject);
 
   const cardElement = getCardElement(cardObject);
-  gallery.append(cardElement);
+  gallery.prepend(cardElement);
 }
 
 cardList.forEach((item) => {
@@ -93,21 +94,16 @@ cardList.forEach((item) => {
 // -- Add Image Modal
 
 const newPlaceModal = document.querySelector(".modal--new-place");
-const addProfileButton = document.querySelector(".profile__add-button");
-const addProfileExitButton = newPlaceModal.querySelector(".modal__exit-btn");
-const addProfileCreateButton = document.forms["new-place-form"];
+const newPlaceButton = document.querySelector(".profile__add-button");
+const newPlaceForm = document.forms["new-place-form"];
 const newPlaceName = newPlaceModal.querySelector("#place-name");
 const newPlaceUrl = newPlaceModal.querySelector("#place-url");
 
-addProfileButton.addEventListener("click", () =>
+newPlaceButton.addEventListener("click", () =>
   toggleModalVisibility(newPlaceModal)
 );
 
-addProfileExitButton.addEventListener("click", () =>
-  toggleModalVisibility(newPlaceModal)
-);
-
-newPlaceModal.addEventListener("submit", handleNewPlaceFormSubmit);
+newPlaceForm.addEventListener("submit", handleNewPlaceFormSubmit);
 
 function handleNewPlaceFormSubmit(evt) {
   evt.preventDefault();
@@ -117,8 +113,8 @@ function handleNewPlaceFormSubmit(evt) {
     link: newPlaceUrl.value,
   });
 
-  newPlaceName.value = "";
-  newPlaceUrl.value = "";
+  evt.target.reset();
+
   toggleModalVisibility(newPlaceModal);
 }
 
@@ -130,8 +126,7 @@ const profileName = profileInfo.querySelector(".profile__name");
 const profileJob = profileInfo.querySelector(".profile__job");
 
 const editProfileModal = document.querySelector(".modal--edit-profile");
-const editProfileModalExitButton =
-  editProfileModal.querySelector(".modal__exit-btn");
+
 const editProfileModalNameInput = editProfileModal.querySelector("#name");
 const editProfileModalJobInput = editProfileModal.querySelector("#job");
 const editProfileModalForm = document.forms["profile-form"];
@@ -143,11 +138,6 @@ function handleProfileFormSubmit(evt) {
   profileJob.textContent = editProfileModalJobInput.value;
   toggleModalVisibility(editProfileModal);
 }
-
-// Close editProfileModal
-editProfileModalExitButton.addEventListener("click", () =>
-  toggleModalVisibility(editProfileModal)
-);
 
 // Submit edit profile modal
 editProfileModalForm.addEventListener("submit", handleProfileFormSubmit);
