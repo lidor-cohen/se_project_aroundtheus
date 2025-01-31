@@ -28,105 +28,35 @@ const cardList = [
 // -- Modal Visibility
 
 function toggleModalVisibility(modalElement) {
-  const formElement = modalElement.querySelector(".form");
-  const inputList = formElement.querySelectorAll(".form__input");
-  const buttonElement = formElement.querySelector(".form__submit");
-
-  toggleButtonState(inputList, buttonElement);
-
   modalElement.classList.toggle("modal_opened");
-}
-
-// -- Form Validation
-
-function updateFormValidation(formElement) {
-  const inputList = formElement.querySelectorAll(".form__input");
-  const formSubmitButton = formElement.querySelector(".form__submit");
-
-  Array.from(inputList).forEach((inputElement) => {
-    checkInputValidity(formElement, inputElement);
-  });
-
-  toggleButtonState(inputList, formSubmitButton);
-}
-
-function hadInvalidInput(inputList) {
-  return Array.from(inputList).some(
-    (inputElement) => !inputElement.validity.valid
-  );
-}
-
-function toggleButtonState(inputList, buttonElement) {
-  const isFormInvalid = hadInvalidInput(inputList);
-
-  if (isFormInvalid) {
-    buttonElement.classList.add("form__submit_inactive");
-    buttonElement.setAttribute("disabled", "");
-  } else {
-    buttonElement.classList.remove("form__submit_inactive");
-    buttonElement.removeAttribute("disabled");
-  }
-}
-
-function showInputError(formElement, inputElement, errorMessage) {
-  const errorElement = formElement.querySelector(
-    `.form__input-error_${inputElement.id}`
-  );
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("form__input-error_active");
-  inputElement.classList.add("form__input_type_error");
-}
-
-function hideInputError(formElement, inputElement) {
-  const errorElement = formElement.querySelector(
-    `.form__input-error_${inputElement.id}`
-  );
-
-  errorElement.classList.remove("form__input-error_active");
-  inputElement.classList.remove("form__input_type_error");
-}
-
-function checkInputValidity(formElement, inputElement) {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-}
-
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(".form__input"));
-  const buttonElement = formElement.querySelector(".form__submit");
-  toggleButtonState(inputList, buttonElement);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", () => {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-}
-
-function enableValidation() {
-  const formList = Array.from(document.forms);
-
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-
-    setEventListeners(formElement);
-  });
 }
 
 // -- Modal Exit
 
-// Exit Button Functionality
+// Exit by Clicking Backdrop
+const modalList = document.querySelectorAll(".modal");
+Array.from(modalList).forEach((modalElement) => {
+  modalElement.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("modal")) {
+      toggleModalVisibility(modalElement);
+    }
+  });
+});
+
+// Exit by Button
 const exitButtons = document.querySelectorAll(".modal__exit-btn");
 exitButtons.forEach((exitButton) => {
   exitButton.addEventListener("click", () => {
     toggleModalVisibility(exitButton.closest(".modal"));
   });
+});
+
+// Exit by Escape Key
+document.addEventListener("keydown", (evt) => {
+  if (evt.key == "Escape") {
+    const activeModal = document.querySelector(".modal_opened");
+    if (activeModal) toggleModalVisibility(activeModal);
+  }
 });
 
 // -- Gallery
@@ -238,4 +168,3 @@ editProfileButton.addEventListener("click", function () {
 
 editProfileModalNameInput.value = profileName.textContent;
 editProfileModalJobInput.value = profileJob.textContent;
-enableValidation();
