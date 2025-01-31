@@ -116,8 +116,12 @@ const newPlaceButton = document.querySelector(".profile__add-button");
 const newPlaceForm = document.forms["new-place-form"];
 const newPlaceName = newPlaceModal.querySelector("#place-name");
 const newPlaceUrl = newPlaceModal.querySelector("#place-url");
+const newPlaceSubmit = newPlaceModal.querySelector(".form__submit");
 
 newPlaceButton.addEventListener("click", () => {
+  newPlaceSubmit.classList.add("form__submit_inactive");
+  newPlaceSubmit.setAttribute("disabled", "");
+  newPlaceForm.reset();
   toggleModalVisibility(newPlaceModal);
 });
 
