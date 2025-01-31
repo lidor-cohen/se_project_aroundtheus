@@ -28,11 +28,100 @@ const cardList = [
 // -- Modal Visibility
 
 function toggleModalVisibility(modalElement) {
+  const formElement = modalElement.querySelector(".form");
+  const inputList = formElement.querySelectorAll(".form__input");
+  const buttonElement = formElement.querySelector(".form__submit");
+
+  toggleButtonState(inputList, buttonElement);
+
   modalElement.classList.toggle("modal_opened");
 }
 
-// -- Modal Exit Buttons
+// -- Form Validation
 
+function updateFormValidation(formElement) {
+  const inputList = formElement.querySelectorAll(".form__input");
+  const formSubmitButton = formElement.querySelector(".form__submit");
+
+  Array.from(inputList).forEach((inputElement) => {
+    checkInputValidity(formElement, inputElement);
+  });
+
+  toggleButtonState(inputList, formSubmitButton);
+}
+
+function hadInvalidInput(inputList) {
+  return Array.from(inputList).some(
+    (inputElement) => !inputElement.validity.valid
+  );
+}
+
+function toggleButtonState(inputList, buttonElement) {
+  const isFormInvalid = hadInvalidInput(inputList);
+
+  if (isFormInvalid) {
+    buttonElement.classList.add("form__submit_inactive");
+    buttonElement.setAttribute("disabled", "");
+  } else {
+    buttonElement.classList.remove("form__submit_inactive");
+    buttonElement.removeAttribute("disabled");
+  }
+}
+
+function showInputError(formElement, inputElement, errorMessage) {
+  const errorElement = formElement.querySelector(
+    `.form__input-error_${inputElement.id}`
+  );
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("form__input-error_active");
+  inputElement.classList.add("form__input_type_error");
+}
+
+function hideInputError(formElement, inputElement) {
+  const errorElement = formElement.querySelector(
+    `.form__input-error_${inputElement.id}`
+  );
+
+  errorElement.classList.remove("form__input-error_active");
+  inputElement.classList.remove("form__input_type_error");
+}
+
+function checkInputValidity(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+}
+
+function setEventListeners(formElement) {
+  const inputList = Array.from(formElement.querySelectorAll(".form__input"));
+  const buttonElement = formElement.querySelector(".form__submit");
+  toggleButtonState(inputList, buttonElement);
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", () => {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+}
+
+function enableValidation() {
+  const formList = Array.from(document.forms);
+
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+
+    setEventListeners(formElement);
+  });
+}
+
+// -- Modal Exit
+
+// Exit Button Functionality
 const exitButtons = document.querySelectorAll(".modal__exit-btn");
 exitButtons.forEach((exitButton) => {
   exitButton.addEventListener("click", () => {
@@ -79,7 +168,6 @@ function getCardElement(card) {
 }
 
 function addNewCard(cardObject) {
-  console.log(cardList);
   cardList.push(cardObject);
 
   const cardElement = getCardElement(cardObject);
@@ -99,9 +187,9 @@ const newPlaceForm = document.forms["new-place-form"];
 const newPlaceName = newPlaceModal.querySelector("#place-name");
 const newPlaceUrl = newPlaceModal.querySelector("#place-url");
 
-newPlaceButton.addEventListener("click", () =>
-  toggleModalVisibility(newPlaceModal)
-);
+newPlaceButton.addEventListener("click", () => {
+  toggleModalVisibility(newPlaceModal);
+});
 
 newPlaceForm.addEventListener("submit", handleNewPlaceFormSubmit);
 
@@ -147,3 +235,7 @@ editProfileButton.addEventListener("click", function () {
   editProfileModalJobInput.value = profileJob.textContent;
   toggleModalVisibility(editProfileModal);
 });
+
+editProfileModalNameInput.value = profileName.textContent;
+editProfileModalJobInput.value = profileJob.textContent;
+enableValidation();
