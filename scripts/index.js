@@ -52,18 +52,23 @@ exitButtons.forEach((exitButton) => {
 });
 
 // Exit by Escape Key
-document.addEventListener("keydown", (evt) => {
+function handleExitModalEscape(evt) {
   if (evt.key == "Escape") {
     const activeModal = document.querySelector(".modal_opened");
     if (activeModal) toggleModalVisibility(activeModal);
+    document.removeEventListener("keydown", handleExitModalEscape);
   }
-});
+}
+
+document.addEventListener("keydown", handleExitModalEscape);
 
 // -- Gallery
 
 const imageViewModal = document.querySelector(".modal--open-image");
 const cardTemplate = document.querySelector("#card-template").content;
 const gallery = document.querySelector(".gallery");
+const image = imageViewModal.querySelector(".modal__image");
+const imageName = imageViewModal.querySelector(".modal__place-name");
 
 function getCardElement(card) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -71,8 +76,6 @@ function getCardElement(card) {
   const cardTitle = cardElement.querySelector(".card__name");
   const likeButton = cardElement.querySelector(".card__like-btn");
   const deleteButton = cardElement.querySelector(".card__delete-btn");
-  const image = imageViewModal.querySelector(".modal__image");
-  const imageName = imageViewModal.querySelector(".modal__place-name");
 
   cardImage.alt = card.name;
   cardImage.src = card.link;
@@ -118,15 +121,6 @@ const newPlaceName = newPlaceModal.querySelector("#place-name");
 const newPlaceUrl = newPlaceModal.querySelector("#place-url");
 const newPlaceSubmit = newPlaceModal.querySelector(".form__submit");
 
-newPlaceButton.addEventListener("click", () => {
-  newPlaceSubmit.classList.add("form__submit_inactive");
-  newPlaceSubmit.setAttribute("disabled", "");
-  newPlaceForm.reset();
-  toggleModalVisibility(newPlaceModal);
-});
-
-newPlaceForm.addEventListener("submit", handleNewPlaceFormSubmit);
-
 function handleNewPlaceFormSubmit(evt) {
   evt.preventDefault();
 
@@ -136,9 +130,16 @@ function handleNewPlaceFormSubmit(evt) {
   });
 
   evt.target.reset();
-
+  newPlaceSubmit.classList.add("form__submit_inactive");
+  newPlaceSubmit.setAttribute("disabled", "");
   toggleModalVisibility(newPlaceModal);
 }
+
+newPlaceButton.addEventListener("click", () => {
+  toggleModalVisibility(newPlaceModal);
+});
+
+newPlaceForm.addEventListener("submit", handleNewPlaceFormSubmit);
 
 // -- Profile Modal
 
@@ -169,6 +170,3 @@ editProfileButton.addEventListener("click", function () {
   editProfileModalJobInput.value = profileJob.textContent;
   toggleModalVisibility(editProfileModal);
 });
-
-editProfileModalNameInput.value = profileName.textContent;
-editProfileModalJobInput.value = profileJob.textContent;
