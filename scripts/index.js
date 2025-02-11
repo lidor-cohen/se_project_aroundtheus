@@ -27,8 +27,22 @@ const cardList = [
 
 // -- Modal Visibility
 
+function handleExitModalEscape(evt) {
+  if (evt.key == "Escape") {
+    const activeModal = document.querySelector(".modal_opened");
+    if (activeModal) toggleModalVisibility(activeModal);
+    document.removeEventListener("keydown", handleExitModalEscape);
+  }
+}
+
 function toggleModalVisibility(modalElement) {
   modalElement.classList.toggle("modal_opened");
+
+  if (modalElement.classList.contains("modal_opened")) {
+    document.addEventListener("keydown", handleExitModalEscape);
+  } else {
+    document.removeEventListener("keydown", handleExitModalEscape);
+  }
 }
 
 // -- Modal Exit
@@ -50,17 +64,6 @@ exitButtons.forEach((exitButton) => {
     toggleModalVisibility(exitButton.closest(".modal"));
   });
 });
-
-// Exit by Escape Key
-function handleExitModalEscape(evt) {
-  if (evt.key == "Escape") {
-    const activeModal = document.querySelector(".modal_opened");
-    if (activeModal) toggleModalVisibility(activeModal);
-    document.removeEventListener("keydown", handleExitModalEscape);
-  }
-}
-
-document.addEventListener("keydown", handleExitModalEscape);
 
 // -- Gallery
 
