@@ -1,3 +1,5 @@
+import Card from "../components/Card.js";
+
 const cardList = [
   {
     name: "Yosemite Valley",
@@ -66,56 +68,34 @@ exitButtons.forEach((exitButton) => {
 });
 
 // -- Gallery
+(() => {
+  const imageViewModal = document.querySelector(".modal--open-image");
+  const image = imageViewModal.querySelector(".modal__image");
+  const imageName = imageViewModal.querySelector(".modal__place-name");
 
-const imageViewModal = document.querySelector(".modal--open-image");
-const cardTemplate = document.querySelector("#card-template").content;
-const gallery = document.querySelector(".gallery");
-const image = imageViewModal.querySelector(".modal__image");
-const imageName = imageViewModal.querySelector(".modal__place-name");
-
-function getCardElement(card) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardTitle = cardElement.querySelector(".card__name");
-  const likeButton = cardElement.querySelector(".card__like-btn");
-  const deleteButton = cardElement.querySelector(".card__delete-btn");
-
-  cardImage.alt = card.name;
-  cardImage.src = card.link;
-  cardTitle.textContent = card.name;
-
-  cardImage.addEventListener("click", (evt) => {
+  const gallery = document.querySelector(".gallery");
+  const cardImageHandler = (card) => {
     toggleModalVisibility(imageViewModal);
 
-    imageName.textContent = card.name;
-    image.alt = card.name;
-    image.src = card.link;
+    imageName.textContent = card.getCard().name;
+    image.alt = card.getCard().name;
+    image.src = card.getCard().link;
+  };
+
+  function addNewCard(data) {
+    const card = new Card(data, ".card", cardImageHandler);
+    cardList.push(data);
+    gallery.prepend(card.getCard().element);
+  }
+
+  cardList.forEach((data) => {
+    const card = new Card(data, ".card", cardImageHandler);
+
+    gallery.append(card.getCard().element);
   });
+})();
 
-  likeButton.addEventListener("click", (evt) => {
-    evt.target.classList.toggle("card__like-btn_mode_liked");
-  });
-
-  deleteButton.addEventListener("click", (evt) => {
-    cardElement.remove();
-  });
-
-  return cardElement;
-}
-
-function addNewCard(cardObject) {
-  cardList.push(cardObject);
-
-  const cardElement = getCardElement(cardObject);
-  gallery.prepend(cardElement);
-}
-
-cardList.forEach((item) => {
-  const cardElement = getCardElement(item);
-  gallery.append(cardElement);
-});
-
-// -- Add Image Modal
+// -- Add Place Modal
 
 const newPlaceModal = document.querySelector(".modal--new-place");
 const newPlaceButton = document.querySelector(".profile__add-button");
