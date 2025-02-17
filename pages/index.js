@@ -38,21 +38,26 @@ const config = {
   inputErrorClass: "form__input_type_error",
   errorClass: "form__input-error_active",
 };
-const newPlaceForm = document.forms["new-place-form"];
-const editProfileForm = document.forms["profile-form"];
+const formValidators = {};
 
-const newPlaceFormValidator = new FormValidator(config, newPlaceForm);
-const editProfileFormValidator = new FormValidator(config, editProfileForm);
+const enableValidation = (config) => {
+  const formList = Array.from(document.forms);
+  formList.forEach((formElement) => {
+    const formName = formElement.getAttribute("name");
+    const validator = new FormValidator(config, formElement);
 
-newPlaceFormValidator.enableValidation();
-editProfileFormValidator.enableValidation();
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(config);
 
 // -- Modal Visibility
 function handleExitModalEscape(evt) {
   if (evt.key == "Escape") {
     const activeModal = document.querySelector(".modal_opened");
     if (activeModal) toggleModalVisibility(activeModal);
-    document.removeEventListener("keydown", handleExitModalEscape);
   }
 }
 
@@ -95,21 +100,25 @@ const gallery = document.querySelector(".gallery");
 const cardImageHandler = (card) => {
   toggleModalVisibility(imageViewModal);
 
-  imageName.textContent = card.getCard().name;
-  image.alt = card.getCard().name;
-  image.src = card.getCard().link;
+  const { name, link } = card.getCard();
+
+  imageName.textContent = name;
+  image.alt = name;
+  image.src = link;
 };
 
-function addNewCard(data) {
+function createCard(data) {
   const card = new Card(data, ".card", cardImageHandler);
+  return card.getCard().element;
+}
+
+function addNewCard(data) {
   cardList.push(data);
-  gallery.prepend(card.getCard().element);
+  gallery.prepend(createCard(data));
 }
 
 cardList.forEach((data) => {
-  const card = new Card(data, ".card", cardImageHandler);
-
-  gallery.append(card.getCard().element);
+  gallery.append(createCard(data));
 });
 
 // -- Add Place Modal
@@ -118,7 +127,6 @@ const newPlaceModal = document.querySelector(".modal--new-place");
 const newPlaceButton = document.querySelector(".profile__add-button");
 const newPlaceName = newPlaceModal.querySelector("#place-name");
 const newPlaceUrl = newPlaceModal.querySelector("#place-url");
-const newPlaceSubmit = newPlaceModal.querySelector(".form__submit");
 
 function handleNewPlaceFormSubmit(evt) {
   evt.preventDefault();
@@ -128,8 +136,7 @@ function handleNewPlaceFormSubmit(evt) {
     link: newPlaceUrl.value,
   });
 
-  newPlaceFormValidator.reset();
-  newPlaceFormValidator.disableSubmitButton();
+  formValidators["new-place-form"].reset();
   toggleModalVisibility(newPlaceModal);
 }
 
@@ -137,7 +144,9 @@ newPlaceButton.addEventListener("click", () => {
   toggleModalVisibility(newPlaceModal);
 });
 
-newPlaceForm.addEventListener("submit", handleNewPlaceFormSubmit);
+formValidators["new-place-form"]
+  .getFormElement()
+  .addEventListener("submit", handleNewPlaceFormSubmit);
 
 // -- Profile Modal
 
@@ -160,11 +169,13 @@ function handleProfileFormSubmit(evt) {
 }
 
 // Submit edit profile modal
-editProfileForm.addEventListener("submit", handleProfileFormSubmit);
+formValidators["profile-form"]
+  .getFormElement()
+  .addEventListener("submit", handleProfileFormSubmit);
 
 editProfileButton.addEventListener("click", function () {
   editProfileModalNameInput.value = profileName.textContent;
   editProfileModalJobInput.value = profileJob.textContent;
-  editProfileFormValidator.hideInputErrors();
+  formValidators["profile-form"].hideInputErrors();
   toggleModalVisibility(editProfileModal);
 });
