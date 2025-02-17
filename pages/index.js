@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 const cardList = [
   {
@@ -27,8 +28,26 @@ const cardList = [
   },
 ];
 
-// -- Modal Visibility
+// -- Form Validator
+const config = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit",
+  errorInputPrefixSelector: ".form__input-error_",
+  inactiveButtonClass: "form__submit_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+};
+const newPlaceForm = document.forms["new-place-form"];
+const editProfileForm = document.forms["profile-form"];
 
+const newPlaceFormValidator = new FormValidator(config, newPlaceForm);
+const editProfileFormValidator = new FormValidator(config, editProfileForm);
+
+newPlaceFormValidator.enableValidation();
+editProfileFormValidator.enableValidation();
+
+// -- Modal Visibility
 function handleExitModalEscape(evt) {
   if (evt.key == "Escape") {
     const activeModal = document.querySelector(".modal_opened");
@@ -68,38 +87,35 @@ exitButtons.forEach((exitButton) => {
 });
 
 // -- Gallery
-(() => {
-  const imageViewModal = document.querySelector(".modal--open-image");
-  const image = imageViewModal.querySelector(".modal__image");
-  const imageName = imageViewModal.querySelector(".modal__place-name");
+const imageViewModal = document.querySelector(".modal--open-image");
+const image = imageViewModal.querySelector(".modal__image");
+const imageName = imageViewModal.querySelector(".modal__place-name");
 
-  const gallery = document.querySelector(".gallery");
-  const cardImageHandler = (card) => {
-    toggleModalVisibility(imageViewModal);
+const gallery = document.querySelector(".gallery");
+const cardImageHandler = (card) => {
+  toggleModalVisibility(imageViewModal);
 
-    imageName.textContent = card.getCard().name;
-    image.alt = card.getCard().name;
-    image.src = card.getCard().link;
-  };
+  imageName.textContent = card.getCard().name;
+  image.alt = card.getCard().name;
+  image.src = card.getCard().link;
+};
 
-  function addNewCard(data) {
-    const card = new Card(data, ".card", cardImageHandler);
-    cardList.push(data);
-    gallery.prepend(card.getCard().element);
-  }
+function addNewCard(data) {
+  const card = new Card(data, ".card", cardImageHandler);
+  cardList.push(data);
+  gallery.prepend(card.getCard().element);
+}
 
-  cardList.forEach((data) => {
-    const card = new Card(data, ".card", cardImageHandler);
+cardList.forEach((data) => {
+  const card = new Card(data, ".card", cardImageHandler);
 
-    gallery.append(card.getCard().element);
-  });
-})();
+  gallery.append(card.getCard().element);
+});
 
 // -- Add Place Modal
 
 const newPlaceModal = document.querySelector(".modal--new-place");
 const newPlaceButton = document.querySelector(".profile__add-button");
-const newPlaceForm = document.forms["new-place-form"];
 const newPlaceName = newPlaceModal.querySelector("#place-name");
 const newPlaceUrl = newPlaceModal.querySelector("#place-url");
 const newPlaceSubmit = newPlaceModal.querySelector(".form__submit");
@@ -112,9 +128,8 @@ function handleNewPlaceFormSubmit(evt) {
     link: newPlaceUrl.value,
   });
 
-  evt.target.reset();
-  newPlaceSubmit.classList.add("form__submit_inactive");
-  newPlaceSubmit.setAttribute("disabled", "");
+  newPlaceFormValidator.reset();
+  newPlaceFormValidator.disableSubmitButton();
   toggleModalVisibility(newPlaceModal);
 }
 
@@ -135,7 +150,6 @@ const editProfileModal = document.querySelector(".modal--edit-profile");
 
 const editProfileModalNameInput = editProfileModal.querySelector("#name");
 const editProfileModalJobInput = editProfileModal.querySelector("#job");
-const editProfileModalForm = document.forms["profile-form"];
 
 // Set form content to name and job
 function handleProfileFormSubmit(evt) {
@@ -146,10 +160,11 @@ function handleProfileFormSubmit(evt) {
 }
 
 // Submit edit profile modal
-editProfileModalForm.addEventListener("submit", handleProfileFormSubmit);
+editProfileForm.addEventListener("submit", handleProfileFormSubmit);
 
 editProfileButton.addEventListener("click", function () {
   editProfileModalNameInput.value = profileName.textContent;
   editProfileModalJobInput.value = profileJob.textContent;
+  editProfileFormValidator.hideInputErrors();
   toggleModalVisibility(editProfileModal);
 });
