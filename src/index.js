@@ -1,8 +1,21 @@
-import Card from "../components/Card.js";
-import FormValidator from "../components/FormValidator.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js";
-import UserInfo from "../components/UserInfo.js";
+import "./styles/normalize.css";
+import "./styles/fonts.css";
+import "./styles/main-wrapper.css";
+import "./styles/page.css";
+import "./styles/header.css";
+import "./styles/content.css";
+import "./styles/profile.css";
+import "./styles/gallery.css";
+import "./styles/card.css";
+import "./styles/footer.css";
+import "./styles/modal.css";
+import "./styles/form.css";
+
+import Card from "./components/Card.js";
+import FormValidator from "./components/FormValidator.js";
+import PopupWithImage from "./components/PopupWithImage.js";
+import PopupWithForm from "./components/PopupWithForm.js";
+import UserInfo from "./components/UserInfo.js";
 
 const cardList = [
   {

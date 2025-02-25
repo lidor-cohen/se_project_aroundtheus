@@ -13,8 +13,6 @@
       content="Jacques Cousteau, U.S. travel, exploration, landscapes, Yosemite Valley, Lake Louise, Bald Mountains, Latemar, Vanoise National Park, Lago di Braies, adventure, nature photography, scenic views, national parks, beautiful destinations"
     />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="pages/index.css" />
-
     <title>Around the U.S.</title>
   </head>
 
@@ -23,14 +21,14 @@
       <header class="header">
         <img
           class="header__logo"
-          src="images/logo/logo.svg"
+          src="<%=require('./images/logo/logo.svg')%>"
           alt="logo around the us"
         />
       </header>
       <main class="content">
         <section class="profile">
           <img
-            src="images/people/Avatar.png"
+            src="<%=require('./images/people/Avatar.png')%>"
             alt="profile picture"
             class="profile__avatar"
           />
@@ -46,7 +44,10 @@
             <h2 class="profile__job">Explorer</h2>
           </div>
           <button type="button" class="profile__add-button">
-            <img src="images/icons/add-button.svg" alt="add button icon" />
+            <img
+              src="<%=require('./images/icons/add-button.svg')%>"
+              alt="add button icon"
+            />
           </button>
         </section>
 
@@ -150,7 +151,5 @@
         </div>
       </div>
     </div>
-
-    <script type="module" src="pages/index.js" defer></script>
   </body>
 </html>
