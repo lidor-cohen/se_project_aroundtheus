@@ -1,0 +1,42 @@
+class Popup {
+  constructor(popupSelector) {
+    this._popup = document.querySelector(popupSelector);
+    this._popupExitButton = this._popup.querySelector(".modal__exit-btn");
+    this._openedModalClass = "modal_opened";
+    this._isOpened = false;
+  }
+
+  open = () => {
+    this._popup.classList.add(this._openedModalClass);
+    document.addEventListener("keydown", this._handleEscClose);
+    this._isOpened = true;
+  };
+
+  close = () => {
+    this._popup.classList.remove(this._openedModalClass);
+    document.removeEventListener("keydown", this._handleEscClose);
+    this._isOpened = false;
+  };
+
+  toggle = () => {
+    this._popup.classList.toggle(this._openedModalClass);
+    this._isOpened = !this._isOpened;
+  };
+
+  _handleEscClose = (evt) => {
+    if (evt.key == "Escape") {
+      if (this._isOpened) this.close();
+    }
+  };
+
+  _handleBackdropClose = (evt) => {
+    if (evt.target.classList.contains("modal")) {
+      this.close();
+    }
+  };
+
+  setEventListeners = () => {
+    this._popup.addEventListener("click", this._handleBackdropClose);
+    this._popupExitButton.addEventListener("click", this.close());
+  };
+}
