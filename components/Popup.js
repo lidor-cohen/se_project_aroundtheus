@@ -1,9 +1,11 @@
-class Popup {
-  constructor(popupSelector) {
+export default class Popup {
+  constructor({ popupSelector }) {
     this._popup = document.querySelector(popupSelector);
     this._popupExitButton = this._popup.querySelector(".modal__exit-btn");
-    this._openedModalClass = "modal_opened";
     this._isOpened = false;
+
+    this._popupContainerClass = "popup";
+    this._openedPopupClass = "popup_opened";
   }
 
   open = () => {
@@ -30,13 +32,13 @@ class Popup {
   };
 
   _handleBackdropClose = (evt) => {
-    if (evt.target.classList.contains("modal")) {
+    if (evt.target.classList.contains(this._popupContainerClass)) {
       this.close();
     }
   };
 
   setEventListeners = () => {
     this._popup.addEventListener("click", this._handleBackdropClose);
-    this._popupExitButton.addEventListener("click", this.close());
+    this._popupExitButton.addEventListener("click", this.close);
   };
 }
