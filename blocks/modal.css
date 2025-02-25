@@ -1,4 +1,4 @@
-.modal {
+.popup {
   box-sizing: border-box;
   top: 0;
   left: 0;
@@ -18,12 +18,12 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-.modal_opened {
+.popup_opened {
   opacity: 1;
   visibility: visible;
 }
 
-.modal__container {
+.popup__container {
   box-sizing: border-box;
   position: relative;
   width: 430px;
@@ -38,7 +38,7 @@
   flex-direction: column;
 }
 
-.modal__image-container {
+.popup__image-container {
   box-sizing: border-box;
   position: relative;
 
@@ -50,24 +50,24 @@
   flex-direction: column;
 }
 
-.modal__image {
+.popup__image {
   max-width: 75vw;
   max-height: 75vh;
 }
 
-.modal__place-name {
+.popup__place-name {
   position: absolute;
   margin: 0;
   top: calc(100% + 10px);
 }
 
-.modal__header {
+.popup__header {
   margin-bottom: 54px;
   margin-top: 0;
   font-size: 24px;
 }
 
-.modal__exit-btn {
+.popup__exit-btn {
   position: absolute;
   width: 40px;
   height: 40px;
@@ -84,28 +84,28 @@
   background-size: cover;
 }
 
-.modal__exit-btn:hover {
+.popup__exit-btn:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 637px) {
-  .modal {
+  .popup {
     padding: 20px;
     top: 0;
     left: 0;
   }
 
-  .modal__container {
+  .popup__container {
     margin: 0 auto;
     padding: 25px 22px;
   }
 
-  .modal__header {
+  .popup__header {
     margin-bottom: 75px;
     font-size: 18px;
   }
 
-  .modal__exit-btn {
+  .popup__exit-btn {
     width: 26px;
     height: 26px;
     right: 0;
