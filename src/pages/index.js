@@ -6,6 +6,12 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 
+// I JUST WANNA SAY THANK YOU
+// BECAUSE I REALLY WAS SURPRISED
+// TO HAVE SUCH LITTLE COMPLICATIONS
+// IN THIS SPRINT'S PROJECT BECAUSE
+// IT WAS A HARD SPRINT
+
 // Popups
 const imagePopup = new PopupWithImage({
   popupSelector: ".popup--open-image",
@@ -74,14 +80,10 @@ enableValidation(config);
     newPlacePopup.open();
   });
   editInfoPopupButton.addEventListener("click", () => {
-    formValidators["profile-form"].setInputValue(
-      "name",
-      userInfo.getUserInfo().name
-    );
-    formValidators["profile-form"].setInputValue(
-      "job",
-      userInfo.getUserInfo().job
-    );
+    userInfoPopup.setInputValues({
+      name: userInfo.getUserInfo().name,
+      job: userInfo.getUserInfo().job,
+    });
     userInfoPopup.open();
   });
 })();

@@ -85,10 +85,6 @@ export default class FormValidator {
     });
   };
 
-  setInputValue(id, value) {
-    this._formElement.querySelector(`#${id}`).value = value;
-  }
-
   enableValidation() {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
