@@ -12,7 +12,7 @@ export default class Card {
       deleteButton: `${cardSelector}__delete-btn`,
     };
 
-    this._init();
+    this.init();
   }
 
   _likeButtonHandler = (evt) => {
@@ -36,20 +36,10 @@ export default class Card {
     });
   };
 
-  _init = () => {
-    const template = document.createElement("template");
-    template.innerHTML = `<div class="card">
-      <img class="card__image" src="" alt="" />
-      <div class="card__name-like">
-        <h2 class="card__name"></h2>
-        <button type="button" class="card__like-btn"></button>
-      </div>
-      <button type="button" class="card__delete-btn"></button>
-    </div>
-  `;
-
-    this._cardElement = template.content
-      .querySelector(this._cardSelector)
+  init = () => {
+    this._cardElement = document
+      .querySelector("#card-template")
+      .content.querySelector(this._cardSelector)
       .cloneNode(true);
 
     this._likeButton = this._cardElement.querySelector(
@@ -70,6 +60,8 @@ export default class Card {
     this._nameElement.textContent = this._name;
 
     this._setEventListeners();
+
+    return this._cardElement;
   };
 
   getCard = () => {
