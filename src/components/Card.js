@@ -6,7 +6,6 @@ export default class Card {
     this._handleImageClick = handleImageClick;
 
     this._cardSelectors = {
-      template: "#card-template",
       name: `${cardSelector}__name`,
       image: `${cardSelector}__image`,
       likeButton: `${cardSelector}__like-btn`,
@@ -38,9 +37,19 @@ export default class Card {
   };
 
   _init = () => {
-    this._cardElement = document
-      .querySelector(this._cardSelectors.template)
-      .content.querySelector(this._cardSelector)
+    const template = document.createElement("template");
+    template.innerHTML = `<div class="card">
+      <img class="card__image" src="" alt="" />
+      <div class="card__name-like">
+        <h2 class="card__name"></h2>
+        <button type="button" class="card__like-btn"></button>
+      </div>
+      <button type="button" class="card__delete-btn"></button>
+    </div>
+  `;
+
+    this._cardElement = template.content
+      .querySelector(this._cardSelector)
       .cloneNode(true);
 
     this._likeButton = this._cardElement.querySelector(

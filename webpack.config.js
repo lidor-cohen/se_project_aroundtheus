@@ -8,7 +8,7 @@ module.exports = {
   target: ["web", "es5"],
 
   entry: {
-    main: "./src/index.js",
+    main: "./src/pages/index.js",
   },
 
   output: {
