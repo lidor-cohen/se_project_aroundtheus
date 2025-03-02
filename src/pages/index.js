@@ -6,11 +6,8 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 
-// I JUST WANNA SAY THANK YOU
-// BECAUSE I REALLY WAS SURPRISED
-// TO HAVE SUCH LITTLE COMPLICATIONS
-// IN THIS SPRINT'S PROJECT BECAUSE
-// IT WAS A HARD SPRINT
+// What is a computer virus?
+// A terminal illness.
 
 // Popups
 const imagePopup = new PopupWithImage({
