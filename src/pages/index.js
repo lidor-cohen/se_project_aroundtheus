@@ -5,6 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
+import Api from "../components/Api.js";
 
 // What is a computer virus?
 // A terminal illness.
@@ -86,3 +87,11 @@ enableValidation(config);
 })();
 
 gallery.renderItems();
+
+const api = new Api();
+// api.addCard({
+//   name: "AFDS",
+//   url: "https://cdn.shopify.com/s/files/1/0515/2043/8433/files/ezgif.com-gif-maker_6.webp?v=1700394744",
+// });
+// api.deleteAllCards();
+api.getInitialCards().then((data) => console.log(data));
