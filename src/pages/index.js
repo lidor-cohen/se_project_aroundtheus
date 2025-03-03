@@ -9,19 +9,53 @@ import Api from "../components/Api.js";
 
 let currentCard = undefined;
 
+// API
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  authToken: "7fef8830-65a5-4840-8327-1cd6adab3c4d",
+});
+
+// Form Validation
+const formValidators = {};
+const enableValidation = (config) => {
+  const formList = Array.from(document.forms);
+  formList.forEach((formElement) => {
+    const formName = formElement.getAttribute("name");
+    const validator = new FormValidator(config, formElement);
+
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+enableValidation(config);
+
 // Delete card Popup
 const deleteCardPopup = new PopupWithForm(
-  { popupSelector: ".popup--delete-card" },
+  {
+    popupSelector: ".popup--delete-card",
+  },
   () => {
-    deleteCardPopup.getForm().querySelector(".form__submit").textContent =
-      "Deleting...";
+    deleteCardPopup.updateFormSubmit("Deleting...");
+    deleteCardPopup.getFormValidator(formValidators).disableSubmitButton();
     return api
       .deleteCard({
         cardId: currentCard.getCard().id,
       })
       .then(() => {
-        renderCards();
+        currentCard.delete();
+        return Promise.resolve();
+      })
+      .then(() => {
+        deleteCardPopup.getFormValidator(formValidators).disableSubmitButton();
         deleteCardPopup.close();
+      })
+      .catch((err) => {
+        deleteCardPopup.updateFormSubmit("Error - Try Again");
+        deleteCardPopup
+          .getFormValidator(formValidators)
+          .disableSubmitButton(false);
+
+        console.error(`Error: ${err}`);
       });
   }
 );
@@ -35,9 +69,11 @@ function createCard(data) {
     },
     deleteCallback: () => {
       currentCard = card;
-      deleteCardPopup.getForm().querySelector(".form__submit").textContent =
-        "Delete";
+      deleteCardPopup.updateFormSubmit("Delete");
       deleteCardPopup.open();
+      deleteCardPopup
+        .getFormValidator(formValidators)
+        .disableSubmitButton(false);
     },
     likeCallback: () => {
       return !card.isLiked
@@ -51,26 +87,30 @@ function createCard(data) {
   return card.getCard().element;
 }
 
-// API
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  authToken: "7fef8830-65a5-4840-8327-1cd6adab3c4d",
-});
-
 // Render all initials information from API
-api.getUser().then((userData) => {
-  userInfo.setUserInfo({
-    name: userData.name,
-    job: userData.about,
-    id: userData._id,
-    pfpURL: userData.avatar,
+api
+  .getUser()
+  .then((userData) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+      id: userData._id,
+      pfpURL: userData.avatar,
+    });
+  })
+  .catch((err) => {
+    userInfo.setUserInfo({
+      name: "Error: Not Found",
+      job: "Error: Not Found",
+    });
+    console.error(`Error: ${err}`);
   });
-  userLoaded = true;
-});
 
-function renderCards() {
-  api.getCards().then((cards) => {
-    const gallery = new Section(
+let gallery = null;
+api
+  .getCards()
+  .then((cards) => {
+    gallery = new Section(
       {
         items: cards,
         renderer: (item) => gallery.addItem(createCard(item), "append"),
@@ -80,9 +120,8 @@ function renderCards() {
 
     gallery.clear();
     gallery.renderItems();
-  });
-}
-renderCards();
+  })
+  .catch((err) => console.error(`Error: ${err}`));
 
 // Change user info
 const editInfoPopupButton = document.querySelector(
@@ -92,12 +131,21 @@ const editInfoPopupButton = document.querySelector(
 const userInfoPopup = new PopupWithForm(
   { popupSelector: ".popup--edit-profile" },
   (data) => {
-    userInfoPopup.getForm().querySelector(".form__submit").textContent =
-      "Saving...";
-    api.updateProfile({ name: data.name, about: data.job }).then((res) => {
-      userInfo.setUserInfo({ name: res.name, job: res.about });
-      userInfoPopup.close();
-    });
+    userInfoPopup.updateFormSubmit("Saving...");
+    userInfoPopup.getFormValidator(formValidators).disableSubmitButton();
+    api
+      .updateProfile({ name: data.name, about: data.job })
+      .then((res) => {
+        userInfo.setUserInfo({ name: res.name, job: res.about });
+        userInfoPopup.close();
+      })
+      .catch((err) => {
+        userInfoPopup.updateFormSubmit("Error - Try Again");
+        userInfoPopup
+          .getFormValidator(formValidators)
+          .disableSubmitButton(false);
+        console.error(`Error: ${err}`);
+      });
   }
 );
 userInfoPopup.setEventListeners();
@@ -106,8 +154,9 @@ editInfoPopupButton.addEventListener("click", () => {
     name: userInfo.getUserInfo().name,
     job: userInfo.getUserInfo().job,
   });
+  userInfoPopup.updateFormSubmit("Save");
+  userInfoPopup.getFormValidator(formValidators).disableSubmitButton();
   userInfoPopup.open();
-  userInfoPopup.getForm().querySelector(".form__submit").textContent = "Save";
 });
 
 // Add new card
@@ -115,21 +164,32 @@ const newPlacePopupButton = document.querySelector(".profile__add-button");
 const newPlacePopup = new PopupWithForm(
   { popupSelector: ".popup--new-place" },
   (data) => {
-    newPlacePopup.getForm().querySelector(".form__submit").textContent =
-      "Creating...";
+    newPlacePopup.updateFormSubmit("Creating...");
+    newPlacePopup.getFormValidator(formValidators).disableSubmitButton();
     api
       .addCard({
         name: data["place-name"],
         url: data["place-url"],
       })
       .then((res) => {
-        renderCards();
+        gallery.addItem(createCard(res));
+        return Promise.resolve();
+      })
+      .then(() => {
+        newPlacePopup.getFormValidator(formValidators).reset();
         newPlacePopup.close();
+      })
+      .catch((err) => {
+        newPlacePopup.updateFormSubmit("Error - Try Again");
+        newPlacePopup
+          .getFormValidator(formValidators)
+          .disableSubmitButton(false);
+        console.error(`Error: ${err}`);
       });
   }
 );
 newPlacePopupButton.addEventListener("click", () => {
-  newPlacePopup.getForm().querySelector(".form__submit").textContent = "Create";
+  newPlacePopup.updateFormSubmit("Create");
   newPlacePopup.open();
 });
 newPlacePopup.setEventListeners();
@@ -145,27 +205,24 @@ const pfpImage = document.querySelector(".profile__avatar");
 const pfpPopup = new PopupWithForm(
   { popupSelector: ".popup--change-pfp" },
   (data) => {
+    pfpPopup.updateFormSubmit("Updating...");
+    pfpPopup.getFormValidator(formValidators).disableSubmitButton();
     api
       .updateProfilePicture({ url: data["pfp-url"] })
       .then((res) => {
-        pfpImage.src = res.avatar;
+        userInfo.setUserInfo({ pfpURL: res.avatar });
+        pfpPopup.getFormValidator(formValidators).reset();
+        pfpPopup.close();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(`Error: ${err}`);
+        pfpPopup.getFormValidator(formValidators).disableSubmitButton(false);
+        pfpPopup.updateFormSubmit("Error - Try Again");
+      });
   }
 );
 pfpPopup.setEventListeners();
-pfpButton.addEventListener("click", () => pfpPopup.open());
-
-// Form Validation
-const formValidators = {};
-const enableValidation = (config) => {
-  const formList = Array.from(document.forms);
-  formList.forEach((formElement) => {
-    const formName = formElement.getAttribute("name");
-    const validator = new FormValidator(config, formElement);
-
-    formValidators[formName] = validator;
-    validator.enableValidation();
-  });
-};
-enableValidation(config);
+pfpButton.addEventListener("click", () => {
+  pfpPopup.open();
+  pfpPopup.updateFormSubmit("Update");
+});

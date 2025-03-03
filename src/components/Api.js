@@ -17,16 +17,9 @@ export default class Api {
 
     if (!isObjectEmpty(body)) opt.body = JSON.stringify(body);
 
-    return fetch(this._apiURL + endpoint, opt)
-      .then((res) => {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.statusText}`);
-      })
-      .then((json) => {
-        return json;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    return fetch(this._apiURL + endpoint, opt).then((res) => {
+      return res.ok ? res.json() : Promise.reject(`Error: ${res.statusText}`);
+    });
   }
 
   getUser() {
@@ -107,11 +100,6 @@ export default class Api {
       })
       .then(() => {
         console.log(`All cards have been deleted!`);
-      })
-      .catch((err) => {
-        console.error(err);
       });
   }
 }
-
-// 7fef8830-65a5-4840-8327-1cd6adab3c4d

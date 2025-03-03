@@ -14,9 +14,8 @@ export default class UserInfo {
   }
 
   setUserInfo({ name, job, id, pfpURL }) {
-    this._nameElement.textContent = name;
-    this._jobElement.textContent = job;
-
+    if (name) this._nameElement.textContent = name;
+    if (job) this._jobElement.textContent = job;
     if (id) this._id = id;
     if (pfpURL) this._pfpElement.src = pfpURL;
   }

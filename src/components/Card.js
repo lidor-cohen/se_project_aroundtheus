@@ -24,10 +24,12 @@ export default class Card {
   }
 
   _likeButtonHandler = (evt) => {
-    this._likeCallback().then(() => {
-      this.isLiked = !this.isLiked;
-      this.updateLike();
-    });
+    this._likeCallback()
+      .then(() => {
+        this.isLiked = !this.isLiked;
+        this.updateLike();
+      })
+      .catch((err) => console.error(`Error: ${err}`));
   };
 
   _deleteButtonHandler = (evt) => {
@@ -70,13 +72,15 @@ export default class Card {
     this._imageElement.src = this._link;
     this._nameElement.textContent = this._name;
 
+    this._cardElement.id = this._id;
+
     this._setEventListeners();
 
     return this._cardElement;
   };
 
   delete() {
-    evt.target.closest(this._cardSelector).remove();
+    this._cardElement.remove();
   }
 
   updateLike() {
