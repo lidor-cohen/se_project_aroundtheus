@@ -1,9 +1,9 @@
 import { isObjectEmpty } from "../utils/utils.js";
 
 export default class Api {
-  constructor() {
-    this._apiURL = "https://around-api.en.tripleten-services.com/v1";
-    this._authToken = "7fef8830-65a5-4840-8327-1cd6adab3c4d";
+  constructor({ baseUrl, authToken }) {
+    this._apiURL = baseUrl;
+    this._authToken = authToken;
   }
 
   apiCall({ endpoint, method, body = {} }) {
@@ -36,7 +36,7 @@ export default class Api {
     });
   }
 
-  getInitialCards() {
+  getCards() {
     return this.apiCall({
       endpoint: "/cards",
       method: "GET",
@@ -83,14 +83,14 @@ export default class Api {
   }
 
   like({ cardId }) {
-    this.apiCall({
+    return this.apiCall({
       endpoint: `/cards/${cardId}/likes`,
       method: "PUT",
     });
   }
 
   unlike({ cardId }) {
-    this.apiCall({
+    return this.apiCall({
       endpoint: `/cards/${cardId}/likes`,
       method: "DELETE",
     });
