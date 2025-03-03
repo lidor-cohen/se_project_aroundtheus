@@ -5,6 +5,7 @@
 ## 📱 Live Demo
 
 [View Live Demo](https://lidor-cohen.github.io/se_project_aroundtheus/)
+[Video Explanation](https://youtu.be/eqVeF5gljBc)
 
 ## 📝 Overview
 
