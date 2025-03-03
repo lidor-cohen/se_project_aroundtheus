@@ -41,6 +41,7 @@ const config = {
 const userInfo = new UserInfo({
   nameElement: document.querySelector(".profile__name"),
   jobElement: document.querySelector(".profile__job"),
+  pfpElement: document.querySelector(".profile__avatar"),
 });
 
 export { cardList, config, userInfo };

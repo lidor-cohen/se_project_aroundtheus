@@ -27,21 +27,29 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            src="<%=require('./images/people/Avatar.png')%>"
-            alt="profile picture"
-            class="profile__avatar"
-          />
+          <div class="profile__avatar-container">
+            <img
+              src="https://assets-v2.lottiefiles.com/a/c57991b2-2ad0-11ee-84bf-57da552a2b2b/aZqwWh5oeU.gif"
+              alt="profile picture"
+              class="profile__avatar"
+            />
+            <div class="profile__avatar-overlay">
+              <img
+                src="<%=require('./images/icons/edit-button.svg')%>"
+                alt="edit profile picture"
+              />
+            </div>
+          </div>
           <div class="profile__info">
             <div class="profile__name-container">
-              <h1 class="profile__name">Jacques Cousteau</h1>
+              <h1 class="profile__name">Loading...</h1>
               <button
                 type="button"
                 aria-label="edit name button"
                 class="profile__edit-name-button"
               ></button>
             </div>
-            <h2 class="profile__job">Explorer</h2>
+            <h2 class="profile__job"></h2>
           </div>
           <button type="button" class="profile__add-button">
             <img
@@ -51,18 +59,7 @@
           </button>
         </section>
 
-        <section class="gallery">
-          <template id="card-template">
-            <div class="card">
-              <img class="card__image" src="" alt="" />
-              <div class="card__name-like">
-                <h2 class="card__name"></h2>
-                <button type="button" class="card__like-btn"></button>
-              </div>
-              <button type="button" class="card__delete-btn"></button>
-            </div>
-          </template>
-        </section>
+        <section class="gallery"></section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2024 Around The U.S.</p>
@@ -151,6 +148,54 @@
         </div>
         a
       </div>
+
+      <div class="popup popup--delete-card">
+        <div class="popup__container">
+          <button type="button" class="popup__exit-btn"></button>
+
+          <form name="delete-card-form" class="form popup__form" novalidate>
+            <h2 class="popup__header">Are you sure?</h2>
+            <button type="submit" class="form__button form__submit">
+              Delete
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup popup--change-pfp">
+        <div class="popup__container">
+          <button type="button" class="popup__exit-btn"></button>
+
+          <h2 class="popup__header">Change profile picture</h2>
+          <form name="change-pfp-form" class="form popup__form" novalidate>
+            <input
+              placeholder="https://somewebsite.com/someimage.jpg"
+              type="url"
+              class="form__input"
+              id="pfp-url"
+              required
+            />
+
+            <span class="form__input-error form__input-error_pfp-url"
+              >Error mesage</span
+            >
+            <button type="submit" class="form__button form__submit">
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
+
+    <template id="card-template">
+      <div class="card">
+        <img class="card__image" src="" alt="" />
+        <div class="card__name-like">
+          <h2 class="card__name"></h2>
+          <button type="button" class="card__like-btn"></button>
+        </div>
+        <button type="button" class="card__delete-btn"></button>
+      </div>
+    </template>
   </body>
 </html>

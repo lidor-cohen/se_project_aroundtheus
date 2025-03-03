@@ -11,6 +11,7 @@
   height: 282px;
 
   cursor: pointer;
+  object-fit: cover;
 }
 
 .card__name-like {
