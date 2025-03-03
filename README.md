@@ -4,7 +4,7 @@
 
 ## 📱 Live Demo
 
-[View Live Demo](https://lidor-cohen.github.io/se_project_aroundtheus/)
+[View Live Demo](https://lidor-cohen.github.io/se_project_aroundtheus/) </br>
 [Video Explanation](https://youtu.be/eqVeF5gljBc)
 
 ## 📝 Overview
