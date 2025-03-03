@@ -13,11 +13,16 @@ let currentCard = undefined;
 const deleteCardPopup = new PopupWithForm(
   { popupSelector: ".popup--delete-card" },
   () => {
+    deleteCardPopup.getForm().querySelector(".form__submit").textContent =
+      "Deleting...";
     return api
       .deleteCard({
         cardId: currentCard.getCard().id,
       })
-      .then(() => renderCards());
+      .then(() => {
+        renderCards();
+        deleteCardPopup.close();
+      });
   }
 );
 deleteCardPopup.setEventListeners();
@@ -30,6 +35,8 @@ function createCard(data) {
     },
     deleteCallback: () => {
       currentCard = card;
+      deleteCardPopup.getForm().querySelector(".form__submit").textContent =
+        "Delete";
       deleteCardPopup.open();
     },
     likeCallback: () => {
@@ -58,6 +65,7 @@ api.getUser().then((userData) => {
     id: userData._id,
     pfpURL: userData.avatar,
   });
+  userLoaded = true;
 });
 
 function renderCards() {
@@ -84,8 +92,11 @@ const editInfoPopupButton = document.querySelector(
 const userInfoPopup = new PopupWithForm(
   { popupSelector: ".popup--edit-profile" },
   (data) => {
+    userInfoPopup.getForm().querySelector(".form__submit").textContent =
+      "Saving...";
     api.updateProfile({ name: data.name, about: data.job }).then((res) => {
       userInfo.setUserInfo({ name: res.name, job: res.about });
+      userInfoPopup.close();
     });
   }
 );
@@ -96,6 +107,7 @@ editInfoPopupButton.addEventListener("click", () => {
     job: userInfo.getUserInfo().job,
   });
   userInfoPopup.open();
+  userInfoPopup.getForm().querySelector(".form__submit").textContent = "Save";
 });
 
 // Add new card
@@ -103,6 +115,8 @@ const newPlacePopupButton = document.querySelector(".profile__add-button");
 const newPlacePopup = new PopupWithForm(
   { popupSelector: ".popup--new-place" },
   (data) => {
+    newPlacePopup.getForm().querySelector(".form__submit").textContent =
+      "Creating...";
     api
       .addCard({
         name: data["place-name"],
@@ -110,10 +124,12 @@ const newPlacePopup = new PopupWithForm(
       })
       .then((res) => {
         renderCards();
+        newPlacePopup.close();
       });
   }
 );
 newPlacePopupButton.addEventListener("click", () => {
+  newPlacePopup.getForm().querySelector(".form__submit").textContent = "Create";
   newPlacePopup.open();
 });
 newPlacePopup.setEventListeners();
